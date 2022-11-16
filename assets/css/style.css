@@ -1,0 +1,26 @@
+.container{
+  width:100vw;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+*{font-family:sans-serif;}
+#clock{
+  font-size:1.5rem;
+  padding:10px;
+}
+label{
+  font-size:1.125rem;
+  padding:5px;
+}
+#password{
+  font-size:1.125rem;
+  outline:none;
+}
+.correct{
+  color:green;
+}
+.incorrect{
+  color:red;
+}
