@@ -6,17 +6,6 @@ const message = $("#message")
 let objectDate = '';
 const allowedKeys = [0,1,2,3,4,5,6,7,8,9];
 
-const actions =  {
-  enter(){
-    verifiedPassword();
-  },
-  backspace(){
-    deleteValue();
-  },
-  f5(){
-    refreshPage();
-  },
-};
 
 
 
@@ -27,6 +16,7 @@ function getMinuteAndSecond(objectDate){
   let firstDigitSeconds = Number(objectDate.getSeconds().toString().length) > 1 ? Number(objectDate.getSeconds().toString()[0]):0;
  
   return {secondDigitMinute, firstDigitSeconds}
+
 }
 
 
@@ -46,9 +36,7 @@ function verifiedPassword(){
       message.innerHTML = printMessage('p', 'incorrect', 'Senha incorreta! Tente novamente.');
       passwordInput.value = ''
     }
-    
-  
-    
+ 
 }
 
 function verifyPassword(getSecondAndFirstObject, passwordValue){

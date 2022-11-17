@@ -10,3 +10,15 @@ const options = {
 	minute: 'numeric',
   second:'numeric'
 };
+
+const actions =  {
+  enter(){
+    verifiedPassword();
+  },
+  backspace(){
+    deleteValue();
+  },
+  f5(){
+    refreshPage();
+  },
+};
