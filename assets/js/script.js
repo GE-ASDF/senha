@@ -4,6 +4,22 @@ const passwordInput = $("#password")
 const clockContainer = $("#clock")
 const message = $("#message")
 let objectDate = '';
+const allowedKeys = [0,1,2,3,4,5,6,7,8,9];
+
+const actions =  {
+  enter(){
+    verifiedPassword();
+  },
+  backspace(){
+    deleteValue();
+  },
+  f5(){
+    refreshPage();
+  },
+};
+
+
+
 
 function getMinuteAndSecond(objectDate){
 
@@ -18,22 +34,21 @@ function passwordCalc({operandoBase, plus, finalBase}, {secondDigitMinute, first
   return secondDigitMinute * operandoBase + plus + firstDigitSeconds + finalBase;
 }
 
-function verifiedPassword(e){
+function verifiedPassword(){
 
   let getSecondAndFirstObject = getMinuteAndSecond(objectDate)
-  let passwordValue = Number(passwordInput.value)
-  let chave = e.key.toLowerCase();
-  
-  if(chave === 'enter'){
-    if(verifyPassword(getSecondAndFirstObject, passwordValue, chave)){
+  let passwordValue = Number(passwordInput.value.trim())
+
+    if(verifyPassword(getSecondAndFirstObject, passwordValue)){
       message.innerHTML = printMessage('p', 'correct', 'A senha está correta!');
       passwordInput.value = ''
     }else{
       message.innerHTML = printMessage('p', 'incorrect', 'Senha incorreta! Tente novamente.');
       passwordInput.value = ''
     }
-  }
+    
   
+    
 }
 
 function verifyPassword(getSecondAndFirstObject, passwordValue){
@@ -48,6 +63,14 @@ function verifyPassword(getSecondAndFirstObject, passwordValue){
 
 }
 
+function deleteValue(){
+  passwordInput.value = passwordInput.value.slice(0, -1)
+}
+
+function refreshPage(){
+  document.location.reload();
+}
+
 function printMessage(tag, className, message){
     return `<${tag} class="${className}">${message}</${tag}>`;
 }
@@ -58,7 +81,23 @@ function printDate(objectDate, options){
   clockContainer.innerHTML = clock;
 }
 
-passwordInput.addEventListener("keypress", verifiedPassword)
+passwordInput.addEventListener("keydown", (e)=>{
+  e.preventDefault();
+
+  let chave = e.key.toLowerCase();
+  
+  if(allowedKeys.includes(Number(e.key)) && passwordInput.value.length < 5 && e.key !== ' '){
+    passwordInput.value += Number(e.key);
+  }
+
+
+  const funcao = actions[chave]
+  
+  if(funcao){
+    funcao();
+  }
+
+})
 
 setInterval(()=>{
   objectDate = new Date();
