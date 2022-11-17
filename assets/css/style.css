@@ -1,26 +1,91 @@
+*,html,body{
+  font-family: sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+@keyframes toBottom {
+  to{
+    transform: translateY(0px);
+  }
+  from{
+    transform: translateY(10px);
+  }
+}
+body{
+  background-color: #232323;
+}
+
 .container{
   width:100vw;
+  height: 100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
 }
-*{font-family:sans-serif;}
-#clock{
-  font-size:1.5rem;
-  padding:10px;
+
+.body-main{
+  color:#909090;
+  background-color: #333333;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  border-radius: 5px;
+  width: 350px;
+  height: 250px;
 }
+
+#clock{
+  color:#fff;
+  font-size:2rem;
+  padding:10px;
+  background-color: #232323;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
 label{
   font-size:1.125rem;
   padding:5px;
 }
+
 #password{
   font-size:1.125rem;
   outline:none;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #4c4a4a;
+  color:rgb(218, 217, 217);
+  border-radius: 2px;
+  padding:5px;
+  font-size: 1.125rem;
 }
+
 .correct{
-  color:green;
+  margin-top:5px;
+  display: block;
+  color:#fff;
+  padding:10px;
+  background-color: green;
+  animation: toBottom 1s forwards;
 }
+
 .incorrect{
-  color:red;
+  margin-top:5px;
+  display: block;
+  color:#fff;
+  padding:10px;
+  background-color: red;
+  animation: toBottom 1s forwards;
+}
+
+.empty{
+  margin-top:5px;
+  display: block;
+  color:#fff;
+  padding:18px;
 }
