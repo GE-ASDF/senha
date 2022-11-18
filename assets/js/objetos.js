@@ -1,7 +1,7 @@
 const optionsObject = {
     operandoBase: 5,
     plus: 1,
-    finalBase: '333'
+    finalBase: ['333', '123']
   }
 
 const options = {

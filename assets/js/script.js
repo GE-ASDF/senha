@@ -7,9 +7,6 @@ let objectDate = '';
 const allowedKeys = [0,1,2,3,4,5,6,7,8,9];
 
 
-
-
-
 function getMinuteAndSecond(objectDate){
 
   let secondDigitMinute = Number(objectDate.getMinutes().toString()[1])
@@ -20,16 +17,19 @@ function getMinuteAndSecond(objectDate){
 }
 
 
-function passwordCalc({operandoBase, plus, finalBase}, {secondDigitMinute, firstDigitSeconds}){
-  return secondDigitMinute * operandoBase + plus + firstDigitSeconds + finalBase;
+function passwordCalc({operandoBase, plus, finalBase}, {secondDigitMinute, firstDigitSeconds}, final){
+  if(finalBase.includes(final)){
+    return secondDigitMinute * operandoBase + plus + firstDigitSeconds + final;
+  }
 }
 
 function verifiedPassword(){
 
   let getSecondAndFirstObject = getMinuteAndSecond(objectDate)
   let passwordValue = Number(passwordInput.value.trim())
+  let final = passwordValue.toString().slice(passwordValue.toString().length - 3)
 
-    if(verifyPassword(getSecondAndFirstObject, passwordValue)){
+    if(verifyPassword(getSecondAndFirstObject, passwordValue, final)){
       message.innerHTML = printMessage('p', 'correct', 'A senha está correta!');
       passwordInput.value = ''
     }else{
@@ -39,10 +39,10 @@ function verifiedPassword(){
  
 }
 
-function verifyPassword(getSecondAndFirstObject, passwordValue){
+function verifyPassword(getSecondAndFirstObject, passwordValue, final){
 
     if(passwordValue){
-      if(passwordValue === Number(passwordCalc(optionsObject, getSecondAndFirstObject))){
+      if(passwordValue === Number(passwordCalc(optionsObject, getSecondAndFirstObject, final))){
        return true;
       }else{
         return false;
